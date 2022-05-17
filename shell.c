@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	{
 		*(argv + 0) = line;
 		*(line + (read - 1)) = '\0';
+		/*exit*/
 		if (strcmp(line, "exit") == 0)
 		{
 			kill(0, SIGCHLD);
@@ -29,6 +30,7 @@ int main(int argc, char **argv)
 
 		for (i = 0; *(line + i); i++)
 		{
+			/*spaces*/
 			if (*(line + i) == ' ')
 			{
 				*(line + i) = '\0';
