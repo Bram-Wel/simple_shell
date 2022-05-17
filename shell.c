@@ -21,7 +21,8 @@ int main(int argc, char **argv)
 	{
 		*(argv + 0) = line;
 		*(line + (read - 1)) = '\0';
-/*exit*/	if (strcmp(line, "exit") == 0)
+
+		if (strcmp(line, "exit") == 0)/*exit*/
 		{
 			kill(0, SIGCHLD);
 			exit(127);
@@ -35,7 +36,7 @@ int main(int argc, char **argv)
 
 		for (i = 0; *(line + i); i++)
 		{
-/*spaces*/		if (*(line + i) == ' ')
+			if (*(line + i) == ' ')/*spaces*/
 			{
 				*(line + i) = '\0';
 				*(argv + argc) = line + (i + 1);
@@ -77,7 +78,7 @@ void global_exec(char *name, char **argv)
 	while (node)
 	{
 		npath = path_cat(node->pathl, *(argv + 0));
-		if(npath)
+		if (npath)
 		{
 			err = checkfile(name, npath);
 			if (err != 1)
