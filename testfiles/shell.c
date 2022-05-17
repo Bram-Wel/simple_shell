@@ -13,8 +13,9 @@ int main(int argc, char **argv)
 {
 	ssize_t read;
 	size_t len = 0;
-	char *line = NULL, *name = *(argv + 0);
-	int i;
+	char *line = NULL;
+	pid_t child;
+	int status, i;
 
 	printf("#cisfun$ ");
 	while ((read = getline(&line, &len, stdin)) != -1)
@@ -40,32 +41,17 @@ int main(int argc, char **argv)
 
 		if (**(argv + 0))
 		{
-			i = checkfile(name, *(argv + 0));
-			if (i != 1)
-				create_child(*(argv + 0), argv);
+			child = fork();
+			if (child == -1)
+				perror(*(argv + 0));
+			else if (child > 0)
+				waitpid(child, &status, 0);
+			else if (execve(*(argv + 0), argv, NULL) == -1)
+				perror(*(argv + 0));
 		}
 		printf("#cisfun$ ");
 	}
 	printf("\n");
 	free(line);
 	return (0);
-}
-
-/**
-  * create_child - Creates a child process.
-  * @name: Name of executing file.
-  * @argv: Argument vector.
-  */
-void create_child(char *name, char **argv)
-{
-	int status;
-	pid_t child = fork();
-
-	if (child == -1)
-		perror(name);
-	else if (child > 0)
-		waitpid(child, &status, 0);
-	else if (execve(name, argv, environ) == -1)
-		perror(name);
-
 }
