@@ -21,17 +21,21 @@ int main(int argc, char **argv)
 	{
 		*(argv + 0) = line;
 		*(line + (read - 1)) = '\0';
-		/*exit*/
-		if (strcmp(line, "exit") == 0)
+/*exit*/	if (strcmp(line, "exit") == 0)
 		{
 			kill(0, SIGCHLD);
 			exit(127);
 		}
+		if (strcmp(line, "env") == 0)
+		{
+			for (i = argc; argv[i]; i++)
+				printf("%s\n", argv[i]);
+			argv[i] = 0;
+		}
 
 		for (i = 0; *(line + i); i++)
 		{
-			/*spaces*/
-			if (*(line + i) == ' ')
+/*spaces*/		if (*(line + i) == ' ')
 			{
 				*(line + i) = '\0';
 				*(argv + argc) = line + (i + 1);
@@ -64,10 +68,9 @@ int main(int argc, char **argv)
 void global_exec(char *name, char **argv)
 {
 	int i = 0, err;
-	char *path = getenv("PATH"), *npath, cwd[PATH_MAX];
+	char *path = getenv("PATH"), *npath;
 	l_path *head, *node;
 
-	(void)cwd;
 	head = linked_path(path);
 	node = head;
 
@@ -90,11 +93,15 @@ void global_exec(char *name, char **argv)
 		}
 	}
 	if (i == 1)
+	{
 		create_child(npath, argv);
+		free(npath);
+	}
 	else
+	{
 		dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", name, argv[0]);
+	}
 
-	free(npath);
 	free_list(head);
 }
 
