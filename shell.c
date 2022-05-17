@@ -16,6 +16,7 @@ int main(int argc, char **argv)
 	char *line = NULL, *name = *(argv + 0);
 	int i;
 
+	printf("#cisfun$ ");
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
 		*(argv + 0) = line;
@@ -43,6 +44,7 @@ int main(int argc, char **argv)
 			if (i != 1)
 				create_child(*(argv + 0), argv);
 		}
+		printf("#cisfun$ ");
 	}
 	printf("\n");
 	free(line);
