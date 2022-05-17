@@ -15,9 +15,8 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	char *line = NULL;
 	pid_t child;
-	int status;
+	int status, i;
 
-	(void)argc;
 	printf("#cisfun$ ");
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
@@ -29,15 +28,26 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 
-		if (*line)
+		for (i = 0; *(line + i); i++)
+		{
+			if (*(line + i) == ' ')
+			{
+				*(line + i) = '\0';
+				*(argv + argc) = line + (i + 1);
+				argc++;
+			}
+		}
+		*(argv + argc) = 0;
+
+		if (**(argv + 0))
 		{
 			child = fork();
 			if (child == -1)
-				perror("Error");
+				perror(*(argv + 0));
 			else if (child > 0)
 				waitpid(child, &status, 0);
 			else if (execve(*(argv + 0), argv, NULL) == -1)
-				perror("Error");
+				perror(*(argv + 0));
 		}
 		printf("#cisfun$ ");
 	}
