@@ -24,7 +24,7 @@ void create_child(char *name, char **argv);
 /**
   * struct l_path - Structure storing PATH directories.
   * @pathl: A directory in the PATH variable.
-  * @next: The next directory in the pah variable.
+  * @next: The next directory in the path variable.
   */
 typedef struct l_path
 {
