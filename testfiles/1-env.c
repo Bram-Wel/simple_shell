@@ -15,7 +15,7 @@ int main(__attribute__((unused))int argc, char **argv, char **envp)
 
 	(void)argv;
 
-	printf("envp: %p\neniron: %p\n", *envp, *environ);
+	printf("envp: %p\nenviron: %p\n", *envp, *environ);
 
 	return (0);
 }
