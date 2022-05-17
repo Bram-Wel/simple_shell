@@ -72,7 +72,7 @@ void global_exec(char *name, char **argv)
 	while (node)
 	{
 		npath = path_cat(node->pathl, *(argv + 0));
-		if(npath)
+		if (npath)
 		{
 			err = checkfile(name, npath);
 			if (err != 1)
