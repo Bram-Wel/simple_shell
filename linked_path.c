@@ -25,7 +25,7 @@
  */
 
 /**
-  * liked_path - Builds linked list of path directories.
+  * linked_path - Builds linked list of path directories.
   * @path: Path variable.
   *
   * Return: Pointer to header of linked list.

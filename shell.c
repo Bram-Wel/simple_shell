@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 		if (strcmp(line, "exit") == 0)
 		{
 			kill(0, SIGCHLD);
-			exit(EXIT_SUCCESS);
+			exit(127);
 		}
 
 		for (i = 0; *(line + i); i++)
@@ -45,12 +45,57 @@ int main(int argc, char **argv)
 			i = checkfile(name, *(argv + 0));
 			if (i != 1)
 				create_child(*(argv + 0), argv);
+			else
+				global_exec(name, argv);
 		}
 		printf("#cisfun$ ");
 	}
 	printf("\n");
 	free(line);
 	return (0);
+}
+/**
+  * global_exec - Executes binary files globaly.
+  * @name: Name of executing file.
+  * @argv: Argument Vector.
+  *
+  * Description: File is executed if it is found within a PATH directory.
+  */
+void global_exec(char *name, char **argv)
+{
+	int i = 0, err;
+	char *path = getenv("PATH"), *npath, cwd[PATH_MAX];
+	l_path *head, *node;
+
+	(void)cwd;
+	head = linked_path(path);
+	node = head;
+
+	while (node)
+	{
+		npath = path_cat(node->pathl, *(argv + 0));
+		if(npath)
+		{
+			err = checkfile(name, npath);
+			if (err != 1)
+			{
+				i = 1;
+				break;
+			}
+			else
+			{
+				free(npath);
+				node = node->next;
+			}
+		}
+	}
+	if (i == 1)
+		create_child(npath, argv);
+	else
+		dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", name, argv[0]);
+
+	free(npath);
+	free_list(head);
 }
 
 /**
@@ -70,4 +115,30 @@ void create_child(char *name, char **argv)
 	else if (execve(name, argv, environ) == -1)
 		perror(name);
 
+}
+
+/**
+  * path_cat - Concatenate paths.
+  * @dest: Destination path.
+  * @src: Source path.
+  *
+  * Return: Pointer to dest path.
+  */
+char *path_cat(char *dest, char *src)
+{
+	int i, len = strlen(dest) + strlen(src) + 1;
+	char *ptr = malloc(len *sizeof(char));
+
+	if (ptr == 0)
+		return (0);
+	for (i = 0; *dest; dest++, i++)
+		*(ptr + i) = *dest;
+	*(ptr + i) = '/';
+	i++;
+	for (; *src; i++, src++)
+		*(ptr + i) = *src;
+	*(ptr + i) = '\0';
+
+
+	return (ptr);
 }

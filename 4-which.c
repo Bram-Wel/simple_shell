@@ -16,28 +16,25 @@
   */
 int checkfile(char *name, char *argv)
 {
-	int i = 1;
+	/*int i = 1;*/
 	struct stat buff;
 
+	(void)name;
 /*	if (argc < 2)
  *	{
  *		perror("Usage: _which filename ...");
  *		exit(EXIT_FAILURE);
  *	}
  */
-	while (argv)/*while (*(argv + i))*/
+	if (argv) /*while (*(argv + i))*/
 	{
-		if (stat(argv, &buff) == 0)
-		{
-			return (0); /*Printf("%s: Found")*/
-		}
-		else
-		{
+		/*Debug: printf("argv: %s\n", argv);*/
+		if (stat(argv, &buff) == 0)/*printf("%s: Found\n", argv);*/
+			return (0);
+		/*if ()
 			dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", name, argv);
-			return (1);
-		}
-		i++;
+		i++;*/
 	}
 
-	return (0);/*exit(EXIT_SUCCESS);*/
+	return (1);/*exit(EXIT_SUCCESS);*/
 }
