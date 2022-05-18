@@ -36,7 +36,8 @@ int main(int argc, char **argv)
 		}
 		print_();/*printf("$ ");*/
 	}
-	/*if (isatty(STDIN_FILENO) == 1)*/_putchar('\n');/*printf("\n");*/
+	if (isatty(STDIN_FILENO) == 1)
+		_putchar('\n');/*printf("\n");*/
 	free(line);
 	return (0);
 }
