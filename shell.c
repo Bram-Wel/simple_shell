@@ -22,17 +22,8 @@ int main(int argc, char **argv)
 	{
 		*(argv + 0) = line;
 		*(line + (read - 1)) = '\0';
-		if (strcmp(line, "exit") == 0)/*exit*/
-		{
-			kill(0, SIGCHLD);
-			exit(127);
-		}
-		if (strcmp(line, "env") == 0)
-		{
-			for (i = argc; argv[i]; i++)
-				printf("%s\n", argv[i]);
-			argv[i] = 0;
-		}
+		exit_b(line);
+		env_b(line, argc, argv);
 		for (i = 0; *(line + i); i++)
 		{
 			if (*(line + i) == ' ')/*spaces*/
