@@ -23,7 +23,7 @@
 void print_path_dirs(char *path)
 {
 	int i = 0;
-	char *pathc = malloc(((int)strlen(path) + 1) * sizeof(char));
+	char *pathc = malloc(((int)_strlen(path) + 1) * sizeof(char));
 
 	if (pathc == 0)
 		return;
@@ -34,6 +34,25 @@ void print_path_dirs(char *path)
 		if (*(path + i) == ':')
 			*(pathc + i) = '\n';
 	}
-	printf("%s\n", pathc);
+	_puts(pathc);/*printf("%s\n", pathc);*/
 	free(pathc);
+}
+
+/**
+  * _strlen - Finds length of string exluding '\0' byte.
+  * @s: String.
+  *
+  * Return: Length in bytes;
+  */
+size_t _strlen(const char *s)
+{
+	size_t len = 0;
+
+	if (s)
+	{
+		for (; *s != '\0'; len++)
+			s++;
+	}
+
+	return (len);
 }

@@ -27,7 +27,7 @@
 int _setenv(const char *name, const char *value, int overwrite)
 {
 	int i = 0, len = 0, j;
-	char *val = getenv(name), **env;
+	char *val = _getenv(name), **env;
 
 	if (val)
 	{
@@ -56,12 +56,12 @@ int _setenv(const char *name, const char *value, int overwrite)
 				return (-1);
 			if (*(environ + i))
 			{
-				memcpy(*(env + i), *(environ + i), (size_t)j);
+				/*memcpy(*(env + i), *(environ + i), (size_t)j);*/
 			}
 			else
 			{
-			j = strlen(val) + 1;
-			memcpy(*(env + i), val, (size_t)j);
+			/*j = strlen(val) + 1;*/
+			/*memcpy(*(env + i), val, (size_t)j);*/
 			}
 		}
 	}

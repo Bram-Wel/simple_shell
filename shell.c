@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 void global_exec(char *name, char **argv)
 {
 	int i = 0, err;
-	char *path = getenv("PATH"), *npath;
+	char *path = _getenv("PATH"), *npath;
 	l_path *head, *node;
 
 	head = linked_path(path);
@@ -134,7 +134,7 @@ void create_child(char *name, char **argv)
   */
 char *path_cat(char *dest, char *src)
 {
-	int i, len = strlen(dest) + strlen(src) + 1;
+	int i, len = _strlen(dest) + _strlen(src) + 1;
 	char *ptr = malloc(len * sizeof(char));
 
 	if (ptr == 0 || !dest || !src)

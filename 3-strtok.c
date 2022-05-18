@@ -30,12 +30,12 @@
   */
 char **strtok_f(char *str)
 {
-	int i = 0, len = strlen(str);
+	int i = 0, len = _strlen(str);
 	char *token, *strc = malloc((len + 1) * sizeof(char));
 	char **str_arr = malloc((len + 1) * sizeof(char));
 
 	strc = strcpy(strc, str);
-	printf("Debug: strc: %s\n", strc);
+	/*printf("Debug: strc: %s\n", strc);*/
 	token = strtok(strc, " ");
 
 	while (token != 0)
