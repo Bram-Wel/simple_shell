@@ -1,9 +1,10 @@
 # [**simple_shell**](https://alx-intranet.hbtn.io/projects/235 "simple_shell Project")
 
-> * The Unix Shell.
-> * The Thompson Shell.
-> * Coding your own shell.
-> * man `sh`.
+ * The Unix Shell.
+ * The Thompson Shell.
+ * Coding your own shell.
+ * man `sh`.
+
 # List of functions and system calls we are allowed to use:
 
 * access (man 2 access)
@@ -34,3 +35,4 @@
 * wait4 (man 2 wait4)
 * write (man 2 write)
 * _exit (man 2 _exit)
+
