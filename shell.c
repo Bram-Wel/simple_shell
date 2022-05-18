@@ -101,7 +101,8 @@ void global_exec(char *name, char **argv)
 	}
 	else
 	{
-		dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", name, argv[0]);
+		perror(name);
+		/*dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", name, argv[0]);*/
 	}
 
 	free_list(head);
