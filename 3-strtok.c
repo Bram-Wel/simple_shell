@@ -44,6 +44,6 @@ char **strtok_f(char *str)
 		token = strtok(NULL, " ");
 		i++;
 	}
-/*	free(strc);
-*/	return (str_arr);
+/*	free(strc);*/
+	return (str_arr);
 }

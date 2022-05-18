@@ -15,13 +15,13 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	char *line = NULL, *name = *(argv + 0);
 	int i;
+	pid_t pid = getpid();
 
-	printf("#cisfun$ ");
+	printf("#cisfun$ %u", pid);
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
 		*(argv + 0) = line;
 		*(line + (read - 1)) = '\0';
-
 		if (strcmp(line, "exit") == 0)/*exit*/
 		{
 			kill(0, SIGCHLD);
@@ -33,7 +33,6 @@ int main(int argc, char **argv)
 				printf("%s\n", argv[i]);
 			argv[i] = 0;
 		}
-
 		for (i = 0; *(line + i); i++)
 		{
 			if (*(line + i) == ' ')/*spaces*/
@@ -44,7 +43,6 @@ int main(int argc, char **argv)
 			}
 		}
 		*(argv + argc) = 0;
-
 		if (**(argv + 0))
 		{
 			i = checkfile(name, *(argv + 0));
@@ -53,12 +51,13 @@ int main(int argc, char **argv)
 			else
 				global_exec(name, argv);
 		}
-		printf("#cisfun$ ");
+		/*printf("#cisfun$ ");*/
 	}
 	printf("\n");
 	free(line);
 	return (0);
 }
+
 /**
   * global_exec - Executes binary files globaly.
   * @name: Name of executing file.
@@ -135,7 +134,7 @@ void create_child(char *name, char **argv)
 char *path_cat(char *dest, char *src)
 {
 	int i, len = strlen(dest) + strlen(src) + 1;
-	char *ptr = malloc(len *sizeof(char));
+	char *ptr = malloc(len * sizeof(char));
 
 	if (ptr == 0)
 		return (0);
