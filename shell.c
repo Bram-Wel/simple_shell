@@ -14,29 +14,17 @@ int main(int argc, char **argv)
 	ssize_t read;
 	size_t len = 0;
 	char *line = NULL, *name = *(argv + 0);
-	int i;
+	int i = 0;
 
-	if (isatty(STDIN_FILENO) == 1)
-	{
-		_putchar('$');
-		_putchar(' ');
-		/*printf("$ ");*/
-	}
+	print_();/*printf("$ ");*/
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
-		*(argv + 0) = line;
 		*(line + (read - 1)) = '\0';
+		for (argv[i] = strtok(line, " "); argv[i] != 0; i++) /*spaces*/
+			strtok(NULL, " ");
 		exit_b(line);
 		env_b(line, argc, argv);
-		for (i = 0; *(line + i); i++)
-		{
-			if (*(line + i) == ' ')/*spaces*/
-			{
-				*(line + i) = '\0';
-				*(argv + argc) = line + (i + 1);
-				argc++;
-			}
-		}
+
 		*(argv + argc) = 0;
 		if (**(argv + 0))
 		{
@@ -46,16 +34,23 @@ int main(int argc, char **argv)
 			else
 				global_exec(name, argv);
 		}
-		if (isatty(STDIN_FILENO) == 1)
-		{
-			_putchar('$');/*printf("$ ");*/
-			_putchar(' ');
-		}
+		print_();/*printf("$ ");*/
 	}
-	if (isatty(STDIN_FILENO) == 1)
-		_putchar('\n');/*printf("\n");*/
+	/*if (isatty(STDIN_FILENO) == 1)*/_putchar('\n');/*printf("\n");*/
 	free(line);
 	return (0);
+}
+
+/**
+  * print_ - Prints $ character.
+  */
+void print_(void)
+{
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		_putchar('$');
+		_putchar(' ');
+	}
 }
 
 /**

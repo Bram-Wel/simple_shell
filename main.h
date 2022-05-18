@@ -17,6 +17,7 @@ extern char **environ;
 
 int _putchar(char c);
 void _puts(char *str);
+void print_(void);
 size_t _strlen(const char *s);
 char **strtok_f(char *str);
 char *_getenv(const char *name);
