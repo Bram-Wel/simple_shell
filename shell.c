@@ -17,7 +17,11 @@ int main(int argc, char **argv)
 	int i;
 
 	if (isatty(STDIN_FILENO) == 1)
-		printf("$ ");
+	{
+		_putchar('$');
+		_putchar(' ');
+		/*printf("$ ");*/
+	}
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
 		*(argv + 0) = line;
@@ -43,10 +47,13 @@ int main(int argc, char **argv)
 				global_exec(name, argv);
 		}
 		if (isatty(STDIN_FILENO) == 1)
-			printf("$ ");
+		{
+			_putchar('$');/*printf("$ ");*/
+			_putchar(' ');
+		}
 	}
 	if (isatty(STDIN_FILENO) == 1)
-		printf("\n");
+		_putchar('\n');/*printf("\n");*/
 	free(line);
 	return (0);
 }
@@ -130,7 +137,7 @@ char *path_cat(char *dest, char *src)
 	int i, len = strlen(dest) + strlen(src) + 1;
 	char *ptr = malloc(len * sizeof(char));
 
-	if (ptr == 0)
+	if (ptr == 0 || !dest || !src)
 		return (0);
 	for (i = 0; *dest; dest++, i++)
 		*(ptr + i) = *dest;
@@ -139,7 +146,5 @@ char *path_cat(char *dest, char *src)
 	for (; *src; i++, src++)
 		*(ptr + i) = *src;
 	*(ptr + i) = '\0';
-
-
 	return (ptr);
 }

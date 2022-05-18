@@ -7,7 +7,7 @@
 void exit_b(char *line)
 {
 	/*exit*/
-	if (strcmp(line, "exit") == 0)
+	if (_strcmp(line, "exit") == 0)
 	{
 		kill(0, SIGCHLD);
 		exit(127);
@@ -25,10 +25,10 @@ void env_b(char *line, int argc, char **envp)
 	int i;
 
 	(void)envp;
-	if (strcmp(line, "env") == 0)
+	if (_strcmp(line, "env") == 0)
 	{
 		for (i = argc; environ[i]; i++)
-			printf("%s\n", environ[i]);
+			_puts(environ[i]);/*printf("%s\n", environ[i]);*/
 		/*envp[i] = 0;*/
 	}
 }

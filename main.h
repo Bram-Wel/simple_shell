@@ -15,6 +15,8 @@
 
 extern char **environ;
 
+int _putchar(char c);
+void _puts(char *str);
 char **strtok_f(char *str);
 char *_getenv(const char *name);
 void print_path_dirs(char *path);
