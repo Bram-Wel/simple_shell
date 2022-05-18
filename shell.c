@@ -4,7 +4,7 @@
   * main - A super simple shell.
   * @argc: Argument count.
   * @argv: Argument vector.
-  * @envp: Environment Variables.
+  * @envp: Environment variables.
   *
   * Description: Runs Commands with their full path without
   * any argument.
@@ -118,7 +118,7 @@ void create_child(char *name, char **argv)
 		perror(name);
 	else if (child > 0)
 		waitpid(child, &status, 0);
-	else if (execve(name, argv, environ) == -1)
+	else if (execve(name, argv, NULL) == -1)
 		perror(name);
 
 }
