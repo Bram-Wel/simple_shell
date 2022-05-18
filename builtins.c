@@ -24,10 +24,11 @@ void env_b(char *line, int argc, char **envp)
 {
 	int i;
 
+	(void)envp;
 	if (strcmp(line, "env") == 0)
 	{
-		for (i = argc; envp[i]; i++)
-			printf("%s\n", envp[i]);
-		envp[i] = 0;
+		for (i = argc; environ[i]; i++)
+			printf("%s\n", environ[i]);
+		/*envp[i] = 0;*/
 	}
 }
