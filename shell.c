@@ -19,7 +19,8 @@ int main(int argc, char **argv)
 	int i = 0;
 
 	envp = argv + argc + 1;
-	print_();/*printf("$ ");*/
+	print_();
+	printf("mypid: %u\n", getpid());
 	while ((read = getline(&line, &len, stdin)) != -1 && tokens)
 	{
 		*(line + (read - 1)) = '\0';
