@@ -32,15 +32,21 @@
   */
 l_path *linked_path(char *path)
 {
-	l_path *head = malloc(sizeof(l_path));
-	l_path *node;
-	int i, len = strlen(path) + 1;
-	char *ptr = malloc(len * sizeof(char));
+	l_path *head, *node;
+	int i, len;
+	char *ptr;
+
+/*	printf("Debug:\n");*/
+/*	printf("PATH: %s\n", path);*/
+	len = _strlen(path) + 1;
+	ptr = malloc(len * sizeof(char));
+	head = malloc(sizeof(l_path));
 
 	if (head == 0 || ptr == 0)
 		return (0);
 
 	node = head;
+
 	for (i = 0; *(path + i); i++)
 	{
 		*(ptr + i) = *(path + i);
@@ -50,6 +56,7 @@ l_path *linked_path(char *path)
 			node->pathl = ptr;
 		}
 	}
+
 	for (; *path; path++)
 	{
 		ptr++;

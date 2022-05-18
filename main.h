@@ -19,7 +19,7 @@ int _putchar(char c);
 void _puts(char *str);
 void print_(void);
 size_t _strlen(const char *s);
-char **strtok_f(char *str);
+void strtok_f(char *str, char **tokens);
 char *_getenv(const char *name);
 void print_path_dirs(char *path);
 int checkfile(char *name, char *argv);
@@ -27,7 +27,7 @@ void create_child(char *name, char **argv);
 char *path_cat(char *dest, char *src);
 int _strcmp(const char *str1, const char *str2);
 void exit_b(char *line);
-void env_b(char *line, int argc, char **envp);
+void env_b(char *line, char **envp);
 
 /**
   * struct l_path - Structure storing PATH directories.

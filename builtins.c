@@ -18,17 +18,14 @@ void exit_b(char *line)
   * env_b - Prints the environment.
   * @line: Line read from stdin.
   * @envp: Environment variable.
-  * @argc: Argument Count.
   */
-void env_b(char *line, int argc, char **envp)
+void env_b(char *line, char **envp)
 {
 	int i;
 
-	(void)envp;
 	if (_strcmp(line, "env") == 0)
 	{
-		for (i = argc; environ[i]; i++)
-			_puts(environ[i]);/*printf("%s\n", environ[i]);*/
-		/*envp[i] = 0;*/
+		for (i = 0; envp[i] != 0; i++)
+			_puts(envp[i]);/*printf("%s\n", environ[i]);*/
 	}
 }

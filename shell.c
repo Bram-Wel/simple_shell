@@ -3,41 +3,43 @@
 /**
   * main - A super simple shell.
   * @argc: Argument count.
-  * @argv:  Argument vector.
+  * @argv: Argument vector.
+  * @envp: Environment Variables.
   *
   * Description: Runs Commands with their full path without
   * any argument.
   * Return: Always 0.
   */
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	ssize_t read;
 	size_t len = 0;
 	char *line = NULL, *name = *(argv + 0);
+	char **tokens = malloc(sizeof(argv));
 	int i = 0;
 
+	(void)argc;
 	print_();/*printf("$ ");*/
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
 		*(line + (read - 1)) = '\0';
-		for (argv[i] = strtok(line, " "); argv[i] != 0; i++) /*spaces*/
-			strtok(NULL, " ");
+		strtok_f(line, tokens);
 		exit_b(line);
-		env_b(line, argc, argv);
+		env_b(line, envp);
 
-		*(argv + argc) = 0;
-		if (**(argv + 0))
+		if (*line)
 		{
-			i = checkfile(name, *(argv + 0));
+			i = checkfile(name, *(tokens + 0));
 			if (i != 1)
-				create_child(*(argv + 0), argv);
+				create_child(*(tokens + 0), tokens);
 			else
-				global_exec(name, argv);
+				global_exec(name, tokens);
 		}
 		print_();/*printf("$ ");*/
 	}
 	if (isatty(STDIN_FILENO) == 1)
 		_putchar('\n');/*printf("\n");*/
+	free(tokens);
 	free(line);
 	return (0);
 }

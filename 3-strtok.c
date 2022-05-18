@@ -25,25 +25,19 @@
 /**
   * strtok_f - Splits a string.
   * @str: String to be split.
-  *
-  * Return: Array of each word in the string.
+  * @tokens: Pointer to tokens.
   */
-char **strtok_f(char *str)
+void strtok_f(char *str, char **tokens)
 {
-	int i = 0, len = _strlen(str);
-	char *token, *strc = malloc((len + 1) * sizeof(char));
-	char **str_arr = malloc((len + 1) * sizeof(char));
+	int i;
+	char *token;
 
-	strc = strcpy(strc, str);
-	/*printf("Debug: strc: %s\n", strc);*/
-	token = strtok(strc, " ");
-
-	while (token != 0)
+	for (token = strtok(str, " "), i = 0; token != 0; i++)
 	{
-		*(str_arr + i) = token;
+	/*printf("token: %s\n*(argv + %d): %s\n", token, i, *(argv + i));*/
+		*(tokens + i) = token;
 		token = strtok(NULL, " ");
-		i++;
 	}
-/*	free(strc);*/
-	return (str_arr);
+	/*printf("envp: %s\n---\nenviron: %s\n", *envp, *environ);*/
+	*(tokens + i) = token;
 }
