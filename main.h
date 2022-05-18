@@ -28,6 +28,8 @@ char *path_cat(char *dest, char *src);
 int _strcmp(const char *str1, const char *str2);
 void exit_b(char *line);
 void env_b(char *line, char **envp);
+int _match(char c, const char *str);
+char *_strtok(char *str, const char *delim);
 
 /**
   * struct l_path - Structure storing PATH directories.

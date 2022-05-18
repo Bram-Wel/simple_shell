@@ -34,7 +34,6 @@ void strtok_f(char *str, char **tokens)
 
 	for (token = strtok(str, " "), i = 0; token != 0; i++)
 	{
-	/*printf("token: %s\n*(argv + %d): %s\n", token, i, *(argv + i));*/
 		*(tokens + i) = token;
 		token = strtok(NULL, " ");
 	}

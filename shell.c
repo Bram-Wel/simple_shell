@@ -10,17 +10,17 @@
   * any argument.
   * Return: Always 0.
   */
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv)
 {
 	ssize_t read;
 	size_t len = 0;
 	char *line = NULL, *name = *(argv + 0);
-	char **tokens = malloc(sizeof(argv));
+	char **tokens = malloc(sizeof(argv) + sizeof(environ)), **envp;
 	int i = 0;
 
-	(void)argc;
+	envp = argv + argc + 1;
 	print_();/*printf("$ ");*/
-	while ((read = getline(&line, &len, stdin)) != -1)
+	while ((read = getline(&line, &len, stdin)) != -1 && tokens)
 	{
 		*(line + (read - 1)) = '\0';
 		strtok_f(line, tokens);
@@ -108,6 +108,7 @@ void global_exec(char *name, char **argv)
   * create_child - Creates a child process.
   * @name: Name of executing file.
   * @argv: Argument vector.
+  * @envp: Environment vector.
   */
 void create_child(char *name, char **argv)
 {
@@ -118,7 +119,7 @@ void create_child(char *name, char **argv)
 		perror(name);
 	else if (child > 0)
 		waitpid(child, &status, 0);
-	else if (execve(name, argv, NULL) == -1)
+	else if (execve(name, argv, environ) == -1)
 		perror(name);
 
 }
