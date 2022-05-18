@@ -15,9 +15,9 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	char *line = NULL, *name = *(argv + 0);
 	int i;
-	pid_t pid = getpid();
 
-	printf("#cisfun$ %u", pid);
+	if (isatty(STDIN_FILENO) == 1)
+		printf("$ ");
 	while ((read = getline(&line, &len, stdin)) != -1)
 	{
 		*(argv + 0) = line;
@@ -51,9 +51,11 @@ int main(int argc, char **argv)
 			else
 				global_exec(name, argv);
 		}
-		/*printf("#cisfun$ ");*/
+		if (isatty(STDIN_FILENO) == 1)
+			printf("$ ");
 	}
-	printf("\n");
+	if (isatty(STDIN_FILENO) == 1)
+		printf("\n");
 	free(line);
 	return (0);
 }
