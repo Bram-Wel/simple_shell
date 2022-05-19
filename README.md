@@ -1,4 +1,4 @@
-# [**simple_shell**](https://alx-intranet.hbtn.io/projects/235 "simple_shell Project")
+# simple_shell
 
  * The Unix Shell.
  * The Thompson Shell.
