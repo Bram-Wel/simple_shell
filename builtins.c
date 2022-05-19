@@ -10,7 +10,7 @@ void exit_b(char *line)
 	if (_strcmp(line, "exit") == 0)
 	{
 		kill(0, SIGCHLD);
-		exit(127);
+		exit(EXIT_SUCCESS);/*127*/
 	}
 }
 

@@ -4,7 +4,6 @@
   * main - A super simple shell.
   * @argc: Argument count.
   * @argv: Argument vector.
-  * @envp: Environment variables.
   *
   * Description: Runs Commands with their full path without
   * any argument.
@@ -110,7 +109,6 @@ void global_exec(char *name, char **argv)
   * create_child - Creates a child process.
   * @name: Name of executing file.
   * @argv: Argument vector.
-  * @envp: Environment vector.
   */
 void create_child(char *name, char **argv)
 {
