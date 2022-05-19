@@ -16,11 +16,12 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	char *line = NULL, *name = *(argv + 0);
 	char **tokens = malloc(sizeof(argv) + sizeof(environ)), **envp;
-	int i = 0;
+	int err = 0;
 
 	envp = argv + argc + 1;
+	(int)getpid();
 	print_();
-	printf("mypid: %u\n", getpid());
+/*	printf("mypid: %u\n", getpid());*/
 	while ((read = getline(&line, &len, stdin)) != -1 && tokens)
 	{
 		*(line + (read - 1)) = '\0';
@@ -30,8 +31,8 @@ int main(int argc, char **argv)
 
 		if (*line)
 		{
-			i = checkfile(name, *(tokens + 0));
-			if (i != 1)
+			err = checkfile(name, *(tokens + 0));
+			if (err != 1)
 				create_child(*(tokens + 0), tokens);
 			else
 				global_exec(name, tokens);

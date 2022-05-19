@@ -14,12 +14,15 @@ int _putchar(char c)
 /**
   * _puts - Prints string to stdout.
   * @str: Pointer to string.
+  *
+  * Return: Characters printed less '\0'.
   */
-void _puts(char *str)
+int _puts(char *str)
 {
 	int i;
 
 	for (i = 0; *str != '\0'; i++, str++)
 		_putchar(*str);
 	_putchar('\n');
+	return (i++);
 }
